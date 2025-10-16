@@ -1,4 +1,4 @@
-# Why such a CLI tool is useful in a production deployment, like Kubernetes?
+### Why such a CLI tool is useful in a production deployment, like Kubernetes?
 
 ## Ollama Tool
 
@@ -22,3 +22,23 @@ Having remote access to this tool, either via 2-way streaming, streaming prompts
 Additional benefit of changing this tool into a remote client is eliminating the need for a SSH connection to the container and eliminating the risks of malicious access or of a coding/typing error causing execution of unwanted commands in the container or on the server.
 
 However, if this is used as full remote admin tool on persistent containers, at least the  `delete` command would need to be implemented and probably the `ps`.("what models are running?") command.
+
+An exchange with remote CLI can look like this:
+
+
+```mermaid
+sequenceDiagram
+    User System->>RemoteCLI: run [model, prompt]
+    RemoteCLI-->>DurableQueue: sore [prompt]
+    RemoteCLI-->>LLM: run [model, prompt]
+    LLM-->>RemoteCLI: [answer]
+    RemoteCLI-->>DurableQueue: sore [answer]
+    RemoteCLI-->>User System:  answer
+```
+
+## Internal Testing in Container
+
+Ollama CLI is used as a health check.
+
+Similarly to the previous option, the tool can run `list` and `ps` on a schedule or on 
+the startup.
