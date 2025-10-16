@@ -19,7 +19,7 @@ Having remote access to this tool, either via 2-way streaming, streaming prompts
     *   scaling up: keeping each container stateless
 
 
-Additional benefit of changing this tool into a remote client is eliminating the need for a SSH connection to the container and eliminating the risks of malicious access or of a coding/typing error causing execution of unwanted commands in the container or on the server.
+Additional benefit of changing this tool into a remote client is eliminating the need for a SSH connection to the container and eliminating the risks of malicious access or of a coding/typing error causing execution of unwanted commands in the container or on the server, for example,  [see](https://google.github.io/building-secure-and-reliable-systems/)
 
 However, if this is used as full remote admin tool on persistent containers, at least the  `delete` command would need to be implemented and probably the `ps`.("what models are running?") command.
 
